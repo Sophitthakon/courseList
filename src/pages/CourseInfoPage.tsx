@@ -1,32 +1,30 @@
-import { useEffect } from "react";
 import { mockData } from "../mock/course";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Box } from "@chakra-ui/react";
 
 const CourseInfoPage: React.FC = () => {
-  const { id, jake } = useParams();
-  const [searchParam, setSearchParam] = useSearchParams();
-
-  useEffect(() => {
-    setSearchParam((param) => {
-      param.set("aom", "kuyy");
-      return param;
-    });
-  }, [setSearchParam]);
+  const { id } = useParams();
 
   if (!id || Number(id) >= mockData.length) {
     return (
       <>
-        <h1> {jake} </h1>
-        <h1> {searchParam.get("show") == "true" ? "true" : "false"}</h1>
-        <h1> {searchParam.get("hello")}</h1>
-        <h1> {Number(searchParam.get("item"))}</h1>
+        <h1> invalid course id </h1>
       </>
     );
   }
 
   const course = mockData[Number(id) - 1];
+  const mySyllabus = course.syllabus.map((syllabus) => {
+    return (
+      <Box border="1px solid black" p="20px" borderRadius="16px">
+        <p> name: {syllabus.name}</p>
+        <p> hour: {syllabus.hour} </p>
+        <p> description: {syllabus.description} </p>
+      </Box>
+    );
+  });
 
-  return <h1> {JSON.stringify(course)} </h1>;
+  return <h1> {mySyllabus} </h1>;
 };
 
 export default CourseInfoPage;
