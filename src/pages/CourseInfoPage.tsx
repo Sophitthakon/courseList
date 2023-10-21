@@ -16,7 +16,12 @@ const CourseInfoPage: React.FC = () => {
   const course = mockData[Number(id) - 1];
   const mySyllabus = course.syllabus.map((syllabus) => {
     return (
-      <Box border="1px solid black" p="20px" borderRadius="16px" bgColor="red">
+      <Box
+        border="1px solid black"
+        p="20px"
+        borderRadius="16px"
+        bgColor="green"
+      >
         <p> name: {syllabus.name}</p>
         <p> hour: {syllabus.hour} </p>
         <p> description: {syllabus.description} </p>
